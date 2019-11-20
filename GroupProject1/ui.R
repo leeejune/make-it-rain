@@ -1,0 +1,33 @@
+#
+# This is the user-interface definition of a Shiny web application. You can
+# run the application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
+library(shiny)
+source("analysis.R")
+
+# Define UI for application that draws a histogram
+shinyUI(fluidPage(
+
+    # Application title
+    titlePanel("Best State To Work In"),
+
+    # Sidebar with a slider input for number of bins
+    sidebarLayout(
+        sidebarPanel(
+            selectInput("colleges",
+                        "Pick Your College:",
+                        choices = list("1","2")
+                       )
+        ),
+
+        # Show a plot of the generated distribution
+        mainPanel(
+            plotOutput("distPlot")
+        )
+    )
+))
