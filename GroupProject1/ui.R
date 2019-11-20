@@ -8,26 +8,69 @@
 #
 
 library(shiny)
-source("analysis.R")
+library(ggplot2)
+library(usmap)
+setwd("~/INFO201/GroupProject/make-it-rain")
+source("analysis.R", local = TRUE)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-
+    
     # Application title
     titlePanel("Best State To Work In"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            selectInput("colleges",
-                        "Pick Your College:",
-                        choices = list("1","2")
-                       )
+    
+    tabsetPanel(
+        type = "tabs", id = "navbar",
+    
+        tabPanel(
+            "Starting Salary By College",
+            titlePanel("Starting Salary By College"),
+            sidebarLayout(
+                sidebarPanel(
+                    selectInput("colleges",
+                                "Pick Your College:",
+                                choices = college_names
+                    )
+                ),
+                # Show a plot of the generated distribution
+                mainPanel(
+                    textOutput("selected_college"),
+                    plotOutput("plot")
+                )
+            ),
         ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
+        
+        tabPanel(
+            "Starting Salary By Degree",
+            titlePanel("Starting Salary By Degree"),
+            sidebarLayout(
+                sidebarPanel(
+                    selectInput("degrees",
+                                "Pick Your Degree:",
+                                choices = degrees_list
+                    )
+                ),
+                # Show a plot of the generated distribution
+                mainPanel(
+                    textOutput("selected_degree")
+                )
+            ),
+        ),
+        
+        tabPanel(
+            "Starting Salary by Region"
+        ),
+        
+        tabPanel(
+            "Conclusion",
+        ),
+        
+        tabPanel(
+            "About the Tech",
+        ),
+        
+        tabPanel(
+            "About Us",
         )
     )
 ))

@@ -8,20 +8,26 @@
 #
 
 library(shiny)
-source("analysis.R")
+setwd("~/INFO201/GroupProject/make-it-rain")
+source("analysis.R", local = TRUE)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-
-    output$distPlot <- renderPlot({
-
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
+    output$selected_college <- renderText({
+        starting_salary <- get_starting_salary(sym("School.Name"), input$colleges, sal_by_col_df)
+        mid_salary <- get_mid_salary(sym("School.Name"), input$colleges, sal_by_col_df)
+        
+        start <- as.numeric(gsub("\\$", "", starting_salary))
+        mid <- as.numeric(gsub("\\$", "", mid_salary))
+        paste("Your predicted starting salary is", get_starting_salary(sym("School.Name"), input$colleges, sal_by_col_df))
+    })
+    
+    output$plot <- renderPlot({
+        get_scatter_plot(sym("Starting.Median.Salary"), sym("Mid.Career.Median.Salary"), sal_by_col_df)
+    })
+    
+    output$selected_degree <- renderText({
+        paste("Your predicted starting salary is", get_starting_salary(sym("Undergraduate.Major"), input$degrees, sal_by_deg_df))
     })
 
 })
