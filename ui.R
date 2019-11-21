@@ -9,9 +9,8 @@
 
 library(shiny)
 library(ggplot2)
-library(usmap)
-setwd("~/INFO201/GroupProject/make-it-rain")
-source("analysis.R", local = TRUE)
+
+source("./analysis.R")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -52,7 +51,7 @@ shinyUI(fluidPage(
                 ),
                 # Show a plot of the generated distribution
                 mainPanel(
-                    textOutput("selected_degree")
+                    textOutput("selected_degree"),
                 )
             ),
         ),

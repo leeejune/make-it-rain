@@ -50,8 +50,9 @@ get_mid_salary <- function(col_name, col_value, df) {
 # 1. first_col  : the name of the first column (pass in as a symbol)
 # 2. second_col : the name of the second column (pass in as a symbol)
 # 3. df         : the data frame which contains both columns
-get_scatter_plot <- function(first_col, second_col, df) {
-  ggplot(df, aes(x = !!first_col, y = !!second_col)) + geom_point()
+get_scatter_plot <- function(first_col, second_col, df, text) {
+  df <- mutate(df, picked_college = ifelse(School.Name == text, School.Name, "other colleges"))
+  ggplot(df, aes(x = !!first_col, y = !!second_col, colour = picked_college)) + geom_point()
 }
 
 
