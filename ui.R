@@ -1,26 +1,28 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(ggplot2)
+library(shinythemes)
 
 source("./analysis.R")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
+    # Shiny theme
+    theme = shinytheme("flatly"),
     
     # Application title
-    titlePanel("Best State To Work In"),
+    titlePanel(h1("The Rapid Rise Of College Tuition", align = "center")),
     
     tabsetPanel(
         type = "tabs", id = "navbar",
-    
+        
+        tabPanel(
+            "The Rise of College Tuition Over the Past 50 Years",
+            titlePanel("The Rise of College Tuition Over the Past 50 Years"),
+            mainPanel(
+                plotOutput("scatter_plot")
+            )
+        ),
+        
         tabPanel(
             "Starting Salary By College",
             titlePanel("Starting Salary By College"),
@@ -34,7 +36,7 @@ shinyUI(fluidPage(
                 # Show a plot of the generated distribution
                 mainPanel(
                     textOutput("selected_college"),
-                    plotOutput("plot")
+                    plotOutput("plot_sal")
                 )
             ),
         ),
@@ -52,24 +54,41 @@ shinyUI(fluidPage(
                 # Show a plot of the generated distribution
                 mainPanel(
                     textOutput("selected_degree"),
+                    plotOutput("plot_deg")
                 )
             ),
-        ),
+         ),
         
-        tabPanel(
-            "Starting Salary by Region"
-        ),
+         tabPanel(
+            "States To Work In",
+            titlePanel("States To Work In"),
+            sidebarLayout(
+                sidebarPanel(
+                    sliderInput("salary",
+                                "Pick Your Salary: ($)",
+                                min = 0,
+                                max = 1000000,
+                                value = 0
+                    )
+                ),
+                # Show a plot of the generated distribution
+                mainPanel(
+                    titlePanel(h3("Income Tax Map", align = "center")),
+                    plotOutput("selected_salary")
+                )
+            )
+         ),
         
-        tabPanel(
+         tabPanel(
             "Conclusion",
-        ),
+         ),
         
-        tabPanel(
+         tabPanel(
             "About the Tech",
-        ),
+         ),
         
-        tabPanel(
+         tabPanel(
             "About Us",
-        )
+         )
     )
 ))

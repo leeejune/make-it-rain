@@ -5,6 +5,8 @@ account: matthewputra
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1504999
-bundleId: 2606108
+bundleId: 2620513
 url: https://matthewputra.shinyapps.io/make-it-rain/
-when: 1574312201.75836
+when: 1574811861.02033
+asMultiple: FALSE
+asStatic: FALSE
