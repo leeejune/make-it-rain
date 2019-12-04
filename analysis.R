@@ -1,4 +1,5 @@
-# This file is used to calculate values and function that will be use in the application
+# This file is used to calculate values and function
+# that will be use in the application
 
 # Import packages
 library(dplyr)
@@ -36,9 +37,9 @@ change_salary_to_integer <- function(df) {
 }
 
 # Returns the given string back without the dollar sign and comma
-num_extract <- function(string){ 
-  as.numeric(gsub('[$,]', '', string))
-} 
+num_extract <- function(string) {
+  as.numeric(gsub("[$,]", "", string))
+}
 
 # Returns the starting median salary based on the given variable from a give data set
 # Parameters :
@@ -69,9 +70,10 @@ get_mid_salary <- function(col_name, col_value, df) {
 # 1. first_col  : the name of the first column (pass in as a symbol)
 # 2. second_col : the name of the second column (pass in as a symbol)
 # 3. df         : the data frame which contains both columns
-# 4. text
-get_scatter_plot <- function(first_col, second_col, df, text, col_name) {
-  df <- mutate(df, Options.Picked = ifelse(!!col_name == text, !!col_name, "Others"))
+# 4. col_value  : the value that will be displayed in a different color
+# 5. col_name   : the column name of the col_value
+get_scatter_plot <- function(first_col, second_col, df, col_value, col_name) {
+  df <- mutate(df, Options.Picked = ifelse(!!col_name == col_value, !!col_name, "Others"))
   df <- change_salary_to_integer(df)
   ggplot(df, aes(x = !!first_col, y = !!second_col, colour = Options.Picked)) +
     geom_point() +
@@ -137,4 +139,3 @@ get_trend_plot <- function(first_col, second_col, df) {
           legend.text = element_blank(),
           legend.position = "none")
 }
-

@@ -36,6 +36,7 @@ shinyUI(fluidPage(
                 # Show a plot of the generated distribution
                 mainPanel(
                     textOutput("selected_college"),
+                    textOutput("selected_college_mid"),
                     plotOutput("plot_sal")
                 )
             ),
@@ -54,6 +55,7 @@ shinyUI(fluidPage(
                 # Show a plot of the generated distribution
                 mainPanel(
                     textOutput("selected_degree"),
+                    textOutput("selected_degree_mid"),
                     plotOutput("plot_deg")
                 )
             ),
@@ -92,3 +94,4 @@ shinyUI(fluidPage(
          )
     )
 ))
+
